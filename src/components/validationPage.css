@@ -40,7 +40,7 @@
   min-width: 14%;
 }
 .urlInput {
-  min-width: 85%;
+  min-width: 85% !important;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #b4b4b4;
   border-radius: 6px;

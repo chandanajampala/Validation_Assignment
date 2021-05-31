@@ -46,7 +46,6 @@ export default class ValidationPage extends Component {
         </div>
         <hr></hr>
         <div className="inputBlock">
-          <div>
             <TextField
               className="urlInput"
               label="Input with URL Validation"
@@ -55,7 +54,6 @@ export default class ValidationPage extends Component {
               }}
               variant="outlined"
             />
-          </div>
           <Button
             onClick={this.addUrl}
             size="medium"
