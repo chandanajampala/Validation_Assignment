@@ -7,7 +7,9 @@ export default class UrlDetails extends Component {
   constructor(props) {
     super(props);
     this.interval = {};
+    this.time={};
     this.state = {
+      lastUpdated:new Date(),
       urlData: localStorage.getItem(this.props.url)
         ? JSON.parse(localStorage.getItem(this.props.url))
         : {},
@@ -16,8 +18,16 @@ export default class UrlDetails extends Component {
   }
   componentDidMount() {
     this.getURLData(this.state.url);
-    this.interval = setInterval(async ()=>{await this.getURLData(this.state.url)}, 30000);
+    this.getCurrentTime();
+    this.interval = setInterval(async ()=>{await this.getURLData(this.state.url)}, 300000);
+    this.time = setInterval(async ()=>{this.getCurrentTime()}, 60000);
   }
+   getCurrentTime = ()=>{    
+     const currentTime= new Date().getTime();
+     const lastUpdated = this.state.urlData.lastcalled?this.state.urlData.lastcalled  :currentTime;
+     console.log(lastUpdated);
+     this.setState({lastUpdated:Math.floor((currentTime-lastUpdated)/ 60000)});
+   }
    getURLData(url) {
      getURL(url).then((items) => {
         this.setState({ urlData: JSON.parse(localStorage.getItem(url)) });
@@ -25,37 +35,24 @@ export default class UrlDetails extends Component {
   }
   componentWillUnmount() {
     clearInterval(this.interval);
+    clearInterval(this.time);
   }
   render() {
     const { urlData } = this.state;
     return (
       <div className="urlDetails">
+        { urlData.status==="ERROR" ? <div class="errorBar"></div>:""}
         <div className="urlData">
           <div className="urlTitle">{urlData.title}</div>
           <div className="url">{this.state.url}</div>
         </div>
         <div className="urlStatus">
-            <div className="lastCalled">{`Last called: ${urlData.lastcalled} `}</div>
-                 <Button variant="contained" className={urlData.status?urlData.status:"PENDING"} onClick={()=>{this.getURLData(this.state.url)}}>{urlData.status?urlData.status:"PENDING" }</Button>
+            <div className="lastCalled">{`Last called: ${this.state.lastUpdated} mins ago `}</div>
+                 <Button variant="contained" className={urlData.status?urlData.status:"PENDING"} onClick={async()=>{await this.getURLData(this.state.url);this.getCurrentTime();}}>{urlData.status?urlData.status:"PENDING" }</Button>
         </div>
       </div>
     );
   }
 }
 
-// import React,{ useEffect, useState } from 'react'
-// import getURL from './tokens/getURL';
-// export default function UrlDetails(props) {
-//     const [urlData, seturlData] = useState({});
-//     useEffect(() => {
-//         // seturlData(JSON.parse(localStorage.getItem(props.url)));
-//         getURL(props.url)
-//           .then(items => {
-//             seturlData(JSON.parse(localStorage.getItem(props.url)));
 
-//           })
-//       })
-//     return (
-
-//     )
-// }

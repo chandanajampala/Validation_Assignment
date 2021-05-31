@@ -20,6 +20,6 @@ export default async function getURL(url) {
                 URLDETAILS.status="ERROR";
             }
         )
-        URLDETAILS.lastcalled = new Date();
+        URLDETAILS.lastcalled = new Date().getTime();
         localStorage.setItem(url,JSON.stringify(URLDETAILS));
 }

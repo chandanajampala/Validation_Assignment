@@ -23,15 +23,17 @@ export default class ValidationPage extends Component {
   }
   addUrl = () => {
     if (validURL(this.state.currentUrl)) {
-      this.setState(
-        { urls: [...this.state.urls, this.state.currentUrl] },
-        function () {
-          localStorage.setItem(
-            "urlForValidation",
-            JSON.stringify(this.state.urls)
-          );
-        }
-      );
+      if (!localStorage.getItem(this.state.currentUrl)) {
+        this.setState(
+          { urls: [...this.state.urls, this.state.currentUrl] },
+          function () {
+            localStorage.setItem(
+              "urlForValidation",
+              JSON.stringify(this.state.urls)
+            );
+          }
+        );
+      } else alert("url already present in tracking list");
     } else alert("enter valid URL");
   };
 
@@ -44,14 +46,15 @@ export default class ValidationPage extends Component {
         </div>
         <hr></hr>
         <div className="inputBlock">
-          <div><TextField
-            className="urlInput"
-            label="Input with URL Validation"
-            onChange={(e) => {
-              this.setState({ currentUrl: e.target.value });
-            }}
-            variant="outlined"
-          />
+          <div>
+            <TextField
+              className="urlInput"
+              label="Input with URL Validation"
+              onChange={(e) => {
+                this.setState({ currentUrl: e.target.value });
+              }}
+              variant="outlined"
+            />
           </div>
           <Button
             onClick={this.addUrl}
