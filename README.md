@@ -1,3 +1,5 @@
+to disable cors use this command --disable-web-security --user-data-dir="c:/someFolderName" in properties target 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

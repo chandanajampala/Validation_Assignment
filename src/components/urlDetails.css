@@ -1,0 +1,56 @@
+.urlDetails {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.urlData {
+  display: flex;
+  flex-direction: column;
+}
+.urlStatus {
+  display: flex;
+  flex-direction: row;
+  float: right;
+  margin-left: auto;
+  column-gap: 20px;
+}
+.urlStatus .LIVE {
+  background: #058423 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+  width: 70px;
+}
+.urlStatus .ERROR {
+  background: #fc5200 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+  width: 70px;
+}
+.urlStatus .PENDING{
+    background: yellowgreen 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+  width: 70px;
+}
+.urlTitle {
+  text-align: left;
+  font: normal normal 600 24px/28px Work Sans;
+  letter-spacing: 0px;
+  color: #181818;
+  opacity: 1;
+}
+.url {
+  text-align: left;
+  font: normal normal normal 16px/19px Work Sans;
+  letter-spacing: 0px;
+  color: #00466e;
+  opacity: 1;
+  margin-top: auto;
+}
+.lastCalled{
+text-align: right;
+font: normal normal normal 16px/19px Work Sans;
+letter-spacing: 0px;
+color: #B4B4B4;
+opacity: 1;
+}
